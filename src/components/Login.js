@@ -12,14 +12,22 @@ function Login() {
     const [userName, setUserName] = useState('');
     const [password, setPassword] = useState('');
     const [open, setOpen] = React.useState(false)
+    const [loginErrorMsg, setLoginErrorMsg] = useState('')
     //const navigate = useNavigate();
     const allUsers = useSelector(getAllUsers);
 
     const onLogin = () => {
-        let existingUsers = allUsers?.filter(x=>{return (x?.email === userName)})
-        if (existingUsers && existingUsers.length > 0){
-            dispatch(setCurrentUser(existingUsers[0]));
-            navigate('/home');
+        let existingUser = allUsers?.find(x=>{return (x?.email === userName)})
+        if (existingUser){
+            if (existingUser.password === password) {
+                dispatch(setCurrentUser(existingUser));
+                navigate('/home');
+            }
+            else 
+                setLoginErrorMsg('Incorrect password')  
+        }
+        else {
+            setLoginErrorMsg('User not found')
         }
     }
     
@@ -45,7 +53,7 @@ function Login() {
                             type='password'
                             onChange={(e) => { setPassword(e.target.value) }}
                         />
-
+                        <span className='errorMsg loginMsg'>{loginErrorMsg}</span>
                         <Button content='Login' primary />
                     </Form>
                 </Grid.Column>
