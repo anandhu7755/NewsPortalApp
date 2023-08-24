@@ -32,18 +32,14 @@ nav {
     flex: 0 0 263px;
     padding: 10px 0;
     overflow-y: auto;
-    /* Make left section scrollable individually */
     max-height: calc(100vh - 50px);
-    /* Adjust max height to leave space for the fixed nav bar */
 }
 
 main {
     flex: 1;
     padding: 14px;
     overflow-y: auto;
-    /* Make main section scrollable individually */
     max-height: calc(100vh - 50px);
-    /* Adjust max height to leave space for the fixed nav bar */
     margin-bottom: 47px;
 
 }
